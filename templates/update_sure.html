@@ -1,0 +1,129 @@
+{% extends 'my_base.html' %}
+{% load staticfiles %}
+{% block title %}<title>潭州课堂 - 老师中心</title>{% endblock %}
+
+{% block custom_css %}
+
+{% endblock %}
+
+{% block navigation %}
+{% endblock %}
+{% block content %}
+    <div class="content"><h1 class="contentTitle">老师资料</h1>
+        <div class="contentBody">
+            <div class="B6J2b">
+                <div class="TZ-Tab TZ-Tab-top">
+                    <div role="tablist" class="TZ-Tab-bar" tabindex="0">
+                        <div class="TZ-Tab-nav-container"><span unselectable="unselectable"
+                                                                class="TZ-Tab-tab-prev TZ-Tab-tab-btn-disabled"><span
+                                class="TZ-Tab-tab-prev-icon"></span></span><span unselectable="unselectable"
+                                                                                 class="TZ-Tab-tab-next TZ-Tab-tab-btn-disabled"><span
+                                class="TZ-Tab-tab-next-icon"></span></span>
+                            <div class="TZ-Tab-nav-wrap">
+                                <div class="TZ-Tab-nav-scroll">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="TZ-Tab-content TZ-Tab-content-animated"
+                         style="transform: translateX(0%) translateZ(0px);">
+                        <div role="tabpanel" aria-hidden="false" class="TZ-Tab-tabpane TZ-Tab-tabpane-active">
+                            <div>
+
+                                <table cellspacing="15px" cellpadding="" class="_3liV0">
+                                </table>
+                                <hr>
+
+                                <form action="{% url 'update_sure' %}" method="post">
+
+                                    <table cellspacing="15px" cellpadding="" class="_3liV0">
+                                        <tbody>
+                                        <tr>
+                                            <td>账号：</td>
+                                            <td>{{ request.user.username }}
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><span>昵称：</span><i>*</i></td>
+                                            <td><input type="text" class="_1zVvg" name="nick_name"
+                                                       placeholder="昵称长度2-15个字，可以是汉字、字母或数字"
+                                                       value="{{ request.user.nick_name }}">
+                                                <p class="_1Qh6M"></p></td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>性别：</td>
+                                            <td><label class="_10Fbo"><input type="radio" value="male" name="gender"
+                                                    {% if request.user.gender == 'male' %}
+                                                                             checked="checked" {% endif %}>
+                                                男</label>
+                                                <label
+                                                        class="_10Fbo"><input type="radio" value="female" name="gender"
+                                                        {% if request.user.gender == 'female' %}
+                                                                              checked="checked" {% endif %}>
+                                                    女</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>常用邮箱：</td>
+                                            <td><input type="text" class="_7oaxl" placeholder="name@example.com"
+                                                       name="email" readonly="readonly"
+                                                       value="{{ request.user.email }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>手机号码：</td>
+                                            <td><input type="text" class="_7oaxl" placeholder="请输入手机号码" name="phone"
+
+                                                       value="{{ request.user.phone }}">
+                                               </td>
+                                        </tr>
+                                        <tr>
+                                            <td><span>绑定QQ：</span><i>*</i></td>
+                                            <td><input type="text" class="_7oaxl" placeholder="请输入常用的QQ号码" name="qq"
+                                                       value="{{ request.user.qq | default_if_none:'' }}">
+                                                <p class="_1Qh6M"></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>生日：</td>
+                                            <td><input placeholder="选择日期" class="_24gyZ" readonly="readonly"
+                                                       name="birthday"
+                                                       value="{{ request.user.birthday | default_if_none:'' }}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>简介：</td>
+                                            <td><textarea maxlength="150" class="_2Q8lf" name="summary"
+                                                          placeholder="请填写简介，15~150个字之间"></textarea></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input class="_2qCjw" id="" type="submit" value="确定"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>{% for key,value in modify_form.errors.items %}{{ value }}{% endfor %}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    {% csrf_token %}
+                                </form>
+
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" aria-hidden="true"
+                             class="TZ-Tab-tabpane TZ-Tab-tabpane-inactive"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_js %}
+    <script src="{% static 'js/jquery.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}" type="text/javascript"></script>
+{% endblock %}
+
